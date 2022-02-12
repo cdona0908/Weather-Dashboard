@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link href="./Assets/css/style.css" rel="stylesheet">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <header class="row">
+        <div class="col-12">
+            <h1 class="text-center p-3 mb-2 grad1 text-white font-weight-bold">Weather Dashboard</h1>
+        </div>        
+    </header>
+    <main class="row">
+        <!--Column for City input and Search History-->
+        <div class="col-12 col-lg-3 flex-column p-3 px-4">
+            <!--form section-->
+            <form id="city-form" class=" border-bottom border-dark pb-4">
+                <h2 class="font-weight-bold">Search for a City:</h2>
+                <input class="input-group input-group-lg mb-3 p-2" placeholder="Miami" id="city-search" name="city" value="">
+                <button type="submit" class="btn  btn-primary btn-block" > Search</button>
+            </form>
+            <!--history section-->
+            <div id="history" class="pt-4">
+
+            </div>            
+
+        </div>
+        <!--Column for City weather info and 5 days forecast-->
+        <div class="col-12 col-lg-9 flex-column p-3 px-4">
+            <!--weather info section-->
+            <div id="current-weather">
+
+            </div>
+            <!--5 days forecast section-->
+            <div class="row" id="forecast">
+
+            </div>
+
+        </div>
+
+    </main>
+ 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>    
+<script src="./Assets/js/script.js"></script>    
+</body>
+</html>
