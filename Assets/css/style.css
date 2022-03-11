@@ -3,4 +3,6 @@
     background-image: linear-gradient(to left, black , blue);
   }
 
- 
+ .bg-dark-blue{
+   background-color: #33475A;
+ }
