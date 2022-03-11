@@ -22,20 +22,31 @@
             <form id="city-form" class=" border-bottom border-dark pb-4">
                 <h2 class="font-weight-bold">Search for a City:</h2>
                 <input class="input-group input-group-lg mb-3 p-2" placeholder="Miami" id="city-search" name="city" value="">
-                <button type="submit" class="btn  btn-primary btn-block" > Search</button>
+                <button type="submit" class="btn  btn-primary btn-block" id="search-btn" > Search</button>
             </form>
             <!--history section-->
-            <div id="history" class="pt-4">
+            <div id="history" class="pt-4">             
+
 
             </div>            
 
         </div>
+
         <!--Column for City weather info and 5 days forecast-->
         <div class="col-12 col-lg-9 flex-column p-3 px-4">
             <!--weather info section-->
-            <div id="current-weather">
+            <div id="current-weather" class= "border rounded">
+                <h3 class="ml-2" id="cityInfo"> <img id="current-weather-icon"> </h3>
+                <ul class="list-unstyled ml-3" id="weather-elements-list">
+                    <li id="temperature"> </li>
+                    <li id="humidity"> </li>
+                    <li id="wind"> </li>
+                    <li id="uv"><span id="uviValue"></span> </li>
+                </ul>
 
             </div>
+
+
             <!--5 days forecast section-->
             <div class="row" id="forecast">
 
