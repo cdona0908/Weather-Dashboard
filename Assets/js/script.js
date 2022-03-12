@@ -12,6 +12,10 @@ var currentWindEl = document.querySelector("#wind");
 var currentUVIndexEl = document.querySelector("#uv");
 var currentUVIValueEl = document.querySelector("#uviValue");
 var weatherForescastContainer = document.querySelector("#forecast");
+var historyContainer = document.querySelector("#history")
+var searchHistory = JSON.parse(localStorage.getItem('city')) || [];
+var clearHistoryBtn = document.querySelector("#clear-btn");
+console.log (searchHistory);
 
 
 
@@ -25,8 +29,8 @@ var formSubmitHandler = function(event) {
     var city = cityNameEl.value.trim();
   
     if (city) {
-      getCityWeather(city);
-  
+      getCityWeather(city);    
+       
       // clear old content
       currentWeatherContainer.textContent = "";
       weatherForescastContainer.textContent = "";
@@ -39,6 +43,7 @@ var formSubmitHandler = function(event) {
 //Get info from openweathermap API
 
 var getCityWeather = function(city){
+    
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city +"&units=imperial" + "&appid=" + apiKey;
     fetch(apiUrl)
     .then(function(response){
@@ -121,12 +126,16 @@ var displayWeather = function(data){
     });
        
     weatherListEl.appendChild( currentWindEl, currentHumidityEl, currentTempEl);
-    currentWeatherContainer.appendChild(weatherListEl);    
+    currentWeatherContainer.appendChild(weatherListEl);
+    addCityToHistory(data.name);
+    displayHistory();
+    
+
 };
 
 var displayForecast = function(data) {
    // var forecastEl = 
-
+ weatherForescastContainer.innerHTML = "";
  var dailyData = data.daily;
  console.log(dailyData);
  for ( var i=1 ; i < 6 ; i++){
@@ -192,5 +201,56 @@ var displayForecast = function(data) {
  }
 };
 
+// function to save city in localstorage
+var addCityToHistory = function(city){
+
+ // verify if the city is already in the history
+ var duplicateCity = false;
+ for (i=0 ; i < searchHistory.length; i++){
+        if(searchHistory[i] === city){
+            duplicateCity = true;
+            break;
+        }
+    }
+    if(!duplicateCity){
+        searchHistory.push(city);
+        localStorage.setItem("city", JSON.stringify(searchHistory));
+        console.log("Search History Array", searchHistory);
+    }        
+    
+};
+
+var displayHistory = function(){
+    
+    historyContainer.innerHTML = "";
+    //for each city in the history, create a button
+ for (var i=0 ; i < searchHistory.length; i++){
+     var historyEl = document.createElement("button");
+     historyEl.classList = "btn-secondary btn-block";
+     historyEl.setAttribute("value", searchHistory[i]);
+     historyEl.setAttribute("type", 'text');
+     historyEl.textContent = searchHistory[i];
+     console.log("city button", historyEl.value);
+     historyEl.addEventListener("click", function(){
+         console.log("send button message", historyEl.value);
+         
+         getCityWeather(historyEl.value);
+     })
+     historyContainer.appendChild(historyEl);
+    }     
+ 
+};
+
 //Event Listeners
+//Search for city
 cityFormEl.addEventListener("submit",formSubmitHandler);
+//Delete History
+clearHistoryBtn.addEventListener("click", function(){
+    searchHistory = [];
+    displayHistory();
+    localStorage.clear();
+    location.reload();
+})
+
+
+displayHistory();
