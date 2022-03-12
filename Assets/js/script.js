@@ -220,10 +220,11 @@ var addCityToHistory = function(city){
     
 };
 
+//function to display the history if exist
 var displayHistory = function(){
     
     historyContainer.innerHTML = "";
-    //for each city in the history, create a button
+    //for each city in the history and create a button
  for (var i=0 ; i < searchHistory.length; i++){
      var historyEl = document.createElement("button");
      historyEl.classList = "btn-secondary btn-block";
@@ -233,8 +234,8 @@ var displayHistory = function(){
      console.log("city button", historyEl.value);
      historyEl.addEventListener("click", function(){
          console.log("send button message", historyEl.value);
-         
-         getCityWeather(historyEl.value);
+         selectedCity = this.value;         
+         getCityWeather(selectedCity);
      })
      historyContainer.appendChild(historyEl);
     }     
